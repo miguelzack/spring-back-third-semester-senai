@@ -1,6 +1,5 @@
 package com.dm.ecommerce.entity;
 
-
 import com.dm.ecommerce.enums.StatusDoPedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
