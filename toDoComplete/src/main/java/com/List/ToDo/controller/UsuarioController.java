@@ -63,4 +63,8 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.deleteUsuario(id));
     }
 
+    @GetMapping(value = "viewtasks/{id}")
+    public  ResponseEntity<?> searchByUser(@PathVariable long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.searchByUser(id));
+    }
 }

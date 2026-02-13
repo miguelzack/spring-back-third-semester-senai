@@ -96,21 +96,5 @@ public class TarefaService {
         }
     }
 
-    // buscar tarefa por usuario
-    public List<TarefaResponseDTO> searchByUser(long usuarioid) {
-        Optional<Usuario> usuariosearchtask = usuarioRepository.findById(usuarioid);
 
-        if (usuariosearchtask.isEmpty()) {
-            throw new RuntimeException("Usuário não encontrado.");
-        }
-
-        Usuario usuario = usuariosearchtask.get();
-
-        List<Tarefa> listaDeTarefasUser = tarefaRepository.findByUsuario(usuario);
-
-        return listaDeTarefasUser.stream()
-                .map(TarefaResponseDTO::new)
-                .toList();
-
-    }
 }

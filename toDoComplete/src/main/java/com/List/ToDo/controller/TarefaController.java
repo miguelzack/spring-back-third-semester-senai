@@ -46,10 +46,7 @@ public class TarefaController {
         return ResponseEntity.status(HttpStatus.OK).body(tarefaService.searchById(id));
     }
 
-    @GetMapping(value = "view/taskbyuser/{id}")
-    public  ResponseEntity<?> searchByUser(@PathVariable long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(tarefaService.searchByUser(id));
-    }
+
 
     @PutMapping("update/{id}")
     public ResponseEntity<?> atualizar(@Valid @PathVariable int id, @RequestBody Tarefa novaTarefa) {
