@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 
@@ -29,6 +28,13 @@ public class Pedido {
 
     @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
     private Pagamento pagamento;
+
+
+    public Pedido(Usuario cliente, LocalDate momento, StatusDoPedido status) {
+        this.cliente = cliente;
+        this.momento = LocalDate.now();
+        this.status = status;
+    }
 }
 
 

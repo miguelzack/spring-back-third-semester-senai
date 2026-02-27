@@ -23,4 +23,10 @@ public class Pagamento {
     @OneToOne
     @MapsId
     private Pedido pedido;
+
+    public Pagamento(Pedido pedido, LocalDate momento) {
+        this.pedido = pedido;
+        this.momento = LocalDate.now();
+    }
+
 }
