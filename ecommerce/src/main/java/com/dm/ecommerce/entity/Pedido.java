@@ -1,8 +1,9 @@
 package com.dm.ecommerce.entity;
 
 import com.dm.ecommerce.enums.StatusDoPedido;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,9 +25,11 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn
+    @JsonBackReference
     private Usuario cliente;
 
     @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Pagamento pagamento;
 
 

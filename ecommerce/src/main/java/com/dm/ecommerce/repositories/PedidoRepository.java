@@ -11,4 +11,6 @@ import java.util.UUID;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
     Optional<Pedido> findById(@NotBlank(message = "O ID do pedido não pode ser vazio.") UUID pedidoId);
+
+    void deleteById(UUID id);
 }

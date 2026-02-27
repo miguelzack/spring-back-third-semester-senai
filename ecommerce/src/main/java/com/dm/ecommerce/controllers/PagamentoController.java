@@ -28,7 +28,6 @@ public class PagamentoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoService.savePagamento(pagamento));
     }
 
-
     @GetMapping(value = "view")
     public List<PagamentoResponseDTO> mostrar() {
         return pagamentoService.mostrar();

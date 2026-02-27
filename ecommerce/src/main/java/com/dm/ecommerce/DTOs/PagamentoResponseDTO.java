@@ -11,11 +11,13 @@ import java.util.UUID;
 @Setter
 
 public class PagamentoResponseDTO {
+    private UUID id;
     private UUID pedido_id;
     private LocalDate momento;
 
     public PagamentoResponseDTO(Pagamento pagamento) {
         this.pedido_id = pagamento.getPedido().getId();
+        this.id = pagamento.getId();
         this.momento = pagamento.getMomento();
     }
 

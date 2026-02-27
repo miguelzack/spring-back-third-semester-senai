@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -32,5 +33,15 @@ public class PedidoController {
     @GetMapping(value = "view")
     public List<PedidoResponseDTO> mostrar() {
         return pedidoService.mostrar();
+    }
+
+    @GetMapping(value = "view/{id}")
+    public ResponseEntity<?> searchById(@PathVariable UUID id) {
+        return ResponseEntity.status(HttpStatus.OK).body(pedidoService.searchPedido(id));
+    }
+
+    @DeleteMapping(value = "delete/{id}")
+    public ResponseEntity<?> deletePedido(@PathVariable UUID id) {
+        return ResponseEntity.status(HttpStatus.OK).body(pedidoService.deletePedido(id));
     }
 }

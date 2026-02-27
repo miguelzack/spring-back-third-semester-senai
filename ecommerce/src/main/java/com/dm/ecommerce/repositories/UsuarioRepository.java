@@ -10,5 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-    Optional<Usuario> findById(@NotBlank(message = "O ID do usuário não pode ser vazio.") UUID clienteId);
+    Optional<Usuario> findById(UUID clienteId);
+    Usuario findByEmail(String email);
+    void deleteById(UUID id);
 }

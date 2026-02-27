@@ -1,5 +1,6 @@
 package com.dm.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Pagamento {
 
     @OneToOne
     @MapsId
+    @JsonBackReference
     private Pedido pedido;
 
     public Pagamento(Pedido pedido, LocalDate momento) {

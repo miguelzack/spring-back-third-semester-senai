@@ -13,12 +13,25 @@ import java.util.UUID;
 
 public class PedidoResponseDTO {
     private UUID cliente_id;
+    private UUID id;
     private LocalDate momento;
     private StatusDoPedido status;
 
     public PedidoResponseDTO(Pedido pedido) {
+        this.id = pedido.getId();
         this.cliente_id = pedido.getCliente().getId();
         this.status = pedido.getStatus();
         this.momento = pedido.getMomento();
     }
+
+    @Override
+    public String toString() {
+        return "PedidoResponseDTO{" +
+                "cliente_id=" + cliente_id +
+                ", id=" + id +
+                ", momento=" + momento +
+                ", status=" + status +
+                '}';
+    }
 }
+
