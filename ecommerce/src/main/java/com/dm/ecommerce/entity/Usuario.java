@@ -21,16 +21,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 public class Usuario {
-    //Não pode criar usuários com mesmo nomes????
     //O retorno ta meio de febem
-    //Fazer um seachbyuser
+    // Fazer um seachbyuser
     //Fazer um put no usuario
     //Ver pra tentar melhorar o tratamento de dados de excessão (tipo campo vazio e etc)
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(unique = true)
     private String nome;
+    @Column(unique = true)
     private String email;
     private String telefone;
     private String senha;
