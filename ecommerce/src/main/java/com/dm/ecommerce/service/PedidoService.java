@@ -30,14 +30,14 @@ public class PedidoService {
     public String savePedido(@Valid PedidoRequestDTO pedidoRequestDTO) {
         Optional<Usuario> usuarioPedido = usuarioRepository.findById(pedidoRequestDTO.getCliente_id());
         if (usuarioPedido.isEmpty()) {
-            return "Usuário não encontrado. Digite ID de um usuário válido";
+            return "Usuário não encontrado. Digite ID de um usuário válido.";
         }
 
         Usuario clienteid = usuarioPedido.get();
 
         Pedido pedido = new Pedido(clienteid, pedidoRequestDTO.getMomento(), pedidoRequestDTO.getStatus());
         pedidoRepository.save(pedido);
-        return "O pedido foi criado";
+        return "O pedido foi criado.";
     }
 
 
@@ -57,7 +57,7 @@ public class PedidoService {
             PedidoResponseDTO dto = new PedidoResponseDTO(pedido.get());
             return dto.toString();
         } else {
-            return "Esse ID não é válido";
+            return "Esse ID não é válido.";
         }
     }
 

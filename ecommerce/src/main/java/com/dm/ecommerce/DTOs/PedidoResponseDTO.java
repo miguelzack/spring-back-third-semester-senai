@@ -26,12 +26,11 @@ public class PedidoResponseDTO {
 
     @Override
     public String toString() {
-        return "PedidoResponseDTO{" +
+        return "Pedido localizado: " +
                 "cliente_id=" + cliente_id +
                 ", id=" + id +
                 ", momento=" + momento +
-                ", status=" + status +
-                '}';
+                ", status=" + status + ".";
     }
 }
 

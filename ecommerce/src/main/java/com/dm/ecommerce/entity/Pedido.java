@@ -36,7 +36,7 @@ public class Pedido {
     public Pedido(Usuario cliente, LocalDate momento, StatusDoPedido status) {
         this.cliente = cliente;
         this.momento = LocalDate.now();
-        this.status = status;
+        this.status = StatusDoPedido.AGUARDANDO_PAGAMENTO;
     }
 }
 

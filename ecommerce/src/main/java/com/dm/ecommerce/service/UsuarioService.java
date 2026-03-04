@@ -1,5 +1,6 @@
 package com.dm.ecommerce.service;
 
+import com.dm.ecommerce.DTOs.LoginRequestDTO;
 import com.dm.ecommerce.DTOs.PedidoResponseDTO;
 import com.dm.ecommerce.DTOs.UsuarioRequestDTO;
 import com.dm.ecommerce.DTOs.UsuarioResponseDTO;
@@ -30,13 +31,13 @@ public class UsuarioService {
         return "Usuário criado com sucesso.";
     }
 
-    public String login(UsuarioRequestDTO usuarioRequestDTO) {
-        Usuario findUsuario = usuarioRepository.findByEmail(usuarioRequestDTO.getEmail());
+    public String login(LoginRequestDTO loginRequestDTO) {
+        Usuario findUsuario = usuarioRepository.findByEmail(loginRequestDTO.getEmail());
 
         if (findUsuario == null) {
             return "Usuário não encontrado.";
         } else {
-            if (findUsuario.getSenha().equals(usuarioRequestDTO.getSenha())) {
+            if (findUsuario.getSenha().equals(loginRequestDTO.getSenha())) {
                 return "Logado com sucesso.";
             } else {
                 return "Senha incorreta.";
@@ -55,7 +56,7 @@ public class UsuarioService {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
             usuarioRepository.deleteById(id);
-            return "Usuário deletado com sucesso";
+            return "Usuário deletado com sucesso.";
         } else {
             return "ID inválido.";
         }
