@@ -29,7 +29,7 @@ public class LoanController {
     }
 
     @GetMapping(value = "view")
-    public List<LoanResponseDTO> mostrar() {
+    public List<LoanResponseDTO> show() {
         return loanService.showLoans();
     }
 

@@ -12,14 +12,14 @@ import java.time.LocalDate;
 public class LoanResponseDTO {
     private long id;
     private long user_id;
-    private LocalDate dataEmprestimo;
-    private LocalDate dataDevolucao;
+    private LocalDate dataLoan;
+    private LocalDate dataReturn;
 
     public LoanResponseDTO(Loan loan) {
         this.id = loan.getId();
         this.user_id = loan.getUser().getId();
-        this.dataEmprestimo = loan.getDataEmprestimo();
-        this.dataDevolucao = loan.getDataDevolucao();
+        this.dataLoan = loan.getDataLoan();
+        this.dataReturn = loan.getDataReturn();
     }
 
     @Override
@@ -27,8 +27,8 @@ public class LoanResponseDTO {
         return "LoanResponseDTO{" +
                 "id=" + id +
                 ", user_id=" + user_id +
-                ", dataEmprestimo=" + dataEmprestimo +
-                ", dataDevolucao=" + dataDevolucao +
+                ", dataLoan=" + dataLoan +
+                ", dataReturn=" + dataReturn +
                 '}';
     }
 }

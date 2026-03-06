@@ -16,14 +16,14 @@ import java.util.List;
 
 public class UserRequestDTO {
     @NotBlank(message = "O campo não pode estar vazio.")
-    private String nome;
+    private String name;
     @NotBlank(message = "O campo não pode estar vazio.")
     @Email
     private String email;
     private List<Loan> loans = new ArrayList<>();
 
-    public UserRequestDTO(String nome, String email, List<Loan> loans) {
-        this.nome = nome;
+    public UserRequestDTO(String name, String email, List<Loan> loans) {
+        this.name = name;
         this.email = email;
         this.loans = loans;
     }

@@ -21,7 +21,7 @@ public class UserService {
 
 
     public String saveUser(UserRequestDTO userRequestDTO) {
-        User user = new User(userRequestDTO.getNome(), userRequestDTO.getEmail());
+        User user = new User(userRequestDTO.getName(), userRequestDTO.getEmail());
         userRepository.save(user);
         return "Usuário criado com sucesso!";
     }

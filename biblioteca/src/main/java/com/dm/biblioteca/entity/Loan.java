@@ -23,12 +23,12 @@ public class Loan {
     @JoinColumn
     @JsonBackReference
     private User user;
-    private LocalDate dataEmprestimo;
-    private LocalDate dataDevolucao;
+    private LocalDate dataLoan;
+    private LocalDate dataReturn;
 
     public Loan(User user) {
         this.user = user;
-        this.dataEmprestimo = LocalDate.now();
-        this.dataDevolucao = dataEmprestimo.plusDays(10);
+        this.dataLoan = LocalDate.now();
+        this.dataReturn = dataLoan.plusDays(10);
     }
 }

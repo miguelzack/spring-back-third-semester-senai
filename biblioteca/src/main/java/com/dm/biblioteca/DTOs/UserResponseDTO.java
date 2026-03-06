@@ -15,13 +15,13 @@ import java.util.List;
 
 public class UserResponseDTO {
     private long id;
-    private String nome;
+    private String name;
     private String email;
     private List<Loan> loans = new ArrayList<>();
 
     public UserResponseDTO(User user) {
         this.id = user.getId();
-        this.nome = user.getNome();
+        this.name = user.getName();
         this.email = user.getEmail();
         this.loans = user.getLoans();
     }
@@ -30,7 +30,7 @@ public class UserResponseDTO {
     public String toString() {
         return "UserResponseDTO{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", loans=" + loans +
                 '}';

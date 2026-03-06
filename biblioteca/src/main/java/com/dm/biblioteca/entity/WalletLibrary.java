@@ -18,18 +18,18 @@ import java.time.LocalDate;
 public class WalletLibrary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long numeroCarteira;
+    private long numberWallet;
     @OneToOne
     @MapsId
     @JsonBackReference
     private User user;
-    private LocalDate dataEmissao;
+    private LocalDate dataEmission;
     private boolean isValid;
 
 
     public WalletLibrary(User user) {
         this.user = user;
-        this.dataEmissao = LocalDate.now();
+        this.dataEmission = LocalDate.now();
         this.isValid = true;
     }
 }

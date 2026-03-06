@@ -1,7 +1,6 @@
 package com.dm.biblioteca.services;
 
 import com.dm.biblioteca.DTOs.*;
-import com.dm.biblioteca.entity.Loan;
 import com.dm.biblioteca.entity.User;
 import com.dm.biblioteca.entity.WalletLibrary;
 import com.dm.biblioteca.repositories.UserRepository;
@@ -39,8 +38,8 @@ public class WalletLibraryService {
     }
 
 
-    public String searchById(long numeroCarteira) {
-        Optional<WalletLibrary> wallet = walletLibraryRepository.findByNumeroCarteira(numeroCarteira);
+    public String searchById(long numberWallet) {
+        Optional<WalletLibrary> wallet = walletLibraryRepository.findByNumberWallet(numberWallet);
 
         if (wallet.isPresent()) {
             WalletLibraryResponseDTO dto = new WalletLibraryResponseDTO(wallet.get());

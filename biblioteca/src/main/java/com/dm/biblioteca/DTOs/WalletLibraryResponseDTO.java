@@ -10,24 +10,24 @@ import java.time.LocalDate;
 @Setter
 
 public class WalletLibraryResponseDTO {
-    private long numeroCarteira;
+    private long numberWallet;
     private long user_id;
-    private LocalDate dataEmissao;
+    private LocalDate dataEmission;
     private boolean isValid;
 
     public WalletLibraryResponseDTO(WalletLibrary walletLibrary) {
-        this.numeroCarteira = walletLibrary.getNumeroCarteira();
+        this.numberWallet = walletLibrary.getNumberWallet();
         this.user_id = walletLibrary.getUser().getId();
-        this.dataEmissao = walletLibrary.getDataEmissao();
+        this.dataEmission = walletLibrary.getDataEmission();
         this.isValid = walletLibrary.isValid();
     }
 
     @Override
     public String toString() {
         return "WalletLibraryResponseDTO{" +
-                "numeroCarteira=" + numeroCarteira +
+                "numberWallet=" + numberWallet +
                 ", user_id=" + user_id +
-                ", dataEmissao=" + dataEmissao +
+                ", dataEmission=" + dataEmission +
                 ", isValid=" + isValid +
                 '}';
     }

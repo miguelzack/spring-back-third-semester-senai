@@ -20,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nome;
+    private String name;
     @Column(unique = true)
     private String email;
 
@@ -32,8 +32,8 @@ public class User {
     @JsonManagedReference
     private WalletLibrary walletLibrary;
 
-    public User(String nome, String email) {
-        this.nome = nome;
+    public User(String name, String email) {
+        this.name = name;
         this.email = email;
     }
 }
