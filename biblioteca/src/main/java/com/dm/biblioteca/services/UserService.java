@@ -19,7 +19,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    //criar usuario
+
     public String saveUser(UserRequestDTO userRequestDTO) {
         User user = new User(userRequestDTO.getNome(), userRequestDTO.getEmail());
         userRepository.save(user);
@@ -27,14 +27,13 @@ public class UserService {
     }
 
 
-    //Mostrar todos os usuários
     public List<UserResponseDTO> showUsers() {
         List<User> users = userRepository.findAll();
         List<UserResponseDTO> listUsers = users.stream().map(UserResponseDTO::new).toList();
         return listUsers;
     }
 
-    //mostrar um usuário específico
+
     public String searchById(long id) {
         Optional<User> user = userRepository.findById(id);
 

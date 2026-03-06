@@ -28,6 +28,10 @@ public class User {
     @JsonManagedReference
     private List<Loan> loans = new ArrayList<>();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private WalletLibrary walletLibrary;
+
     public User(String nome, String email) {
         this.nome = nome;
         this.email = email;
