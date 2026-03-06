@@ -27,7 +27,7 @@ public class WalletLibrary {
     private boolean isValid;
 
 
-    public WalletLibrary(User user, LocalDate dataEmissao, boolean isValid) {
+    public WalletLibrary(User user) {
         this.user = user;
         this.dataEmissao = LocalDate.now();
         this.isValid = true;

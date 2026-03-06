@@ -26,10 +26,10 @@ public class LoanService {
 
     public String saveLoan(@Valid LoanRequestDTO loanRequestDTO) {
         Optional<User> userLoan = userRepository.findById(loanRequestDTO.getUser_id());
-        if (userLoan.isPresent()) {
+        if (userLoan.isPresent() && userLoan.get().getWalletLibrary().isValid()) {
             User userId = userLoan.get();
 
-            Loan loan = new Loan(userId, loanRequestDTO.getDataEmprestimo(), loanRequestDTO.getDataDevolucao());
+            Loan loan = new Loan(userId);
             loanRepository.save(loan);
             return "Empréstimo criado!";
         } else {
