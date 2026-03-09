@@ -31,9 +31,9 @@ public class WalletLibraryService {
 
             WalletLibrary wallet = new WalletLibrary(userId);
             walletLibraryRepository.save(wallet);
-            return "Carteira criada!";
+            return "Wallet created!";
         } else {
-            return "Esse ID não é válido.";
+            return "This ID is not valid.";
         }
     }
 
@@ -45,7 +45,7 @@ public class WalletLibraryService {
             WalletLibraryResponseDTO dto = new WalletLibraryResponseDTO(wallet.get());
             return dto.toString();
         } else {
-            return "Esse ID não é válido. Tente novamente.";
+            return "This ID is not valid. Please try again.";
         }
     }
 

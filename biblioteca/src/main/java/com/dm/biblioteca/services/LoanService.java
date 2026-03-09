@@ -31,9 +31,9 @@ public class LoanService {
 
             Loan loan = new Loan(userId);
             loanRepository.save(loan);
-            return "Empréstimo criado!";
+            return "Loan created!";
         } else {
-            return "Esse ID não é válido.";
+            return "This ID is not valid.";
         }
     }
 
@@ -51,7 +51,7 @@ public class LoanService {
             LoanResponseDTO dto = new LoanResponseDTO(loan.get());
             return dto.toString();
         } else {
-            return "Esse ID não é válido. Tente novamente.";
+            return "This ID is not valid. Please try again.";
         }
     }
 
@@ -61,9 +61,9 @@ public class LoanService {
 
         if (loan.isPresent()) {
             loanRepository.deleteById(id);
-            return "Empréstimo deletado com sucesso!";
+            return "Loan successfully deleted!";
         } else {
-            return "Esse ID não é válido";
+            return "This ID is not valid. Please try again.";
         }
     }
 }

@@ -23,7 +23,7 @@ public class UserService {
     public String saveUser(UserRequestDTO userRequestDTO) {
         User user = new User(userRequestDTO.getName(), userRequestDTO.getEmail());
         userRepository.save(user);
-        return "Usuário criado com sucesso!";
+        return "User created successfully!";
     }
 
 
@@ -41,7 +41,7 @@ public class UserService {
             UserResponseDTO dto = new UserResponseDTO(user.get());
             return dto.toString();
         } else {
-            return "Esse ID não é válido. Tente novamente.";
+            return "This ID is not valid. Please try again.";
         }
     }
 
@@ -52,9 +52,9 @@ public class UserService {
             User user = oldUser.get();
             user.setEmail(newUser.getEmail());
             userRepository.save(user);
-            return "O email foi alterado com sucesso. Novo email: " + user.getEmail();
+            return "The email address has been successfully changed. New email address: " + user.getEmail();
         } else {
-            return "Esse ID não é válido.";
+            return "This ID is not valid.";
         }
     }
 
@@ -63,9 +63,9 @@ public class UserService {
 
         if (user.isPresent()) {
             userRepository.deleteById(id);
-            return "Usuário deletado com sucesso!";
+            return "User deleted successfully!";
         } else {
-            return "Esse ID não é válido";
+            return "This ID is not valid.";
         }
     }
 }
