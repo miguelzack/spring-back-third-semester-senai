@@ -17,6 +17,7 @@ public class PedidoRequestDTO {
     private UUID cliente_id;
     private LocalDate momento;
     private StatusDoPedido status;
+    private List<ItemDoPedidoDTO> items;
 
     public PedidoRequestDTO(UUID cliente_id, LocalDate momento, StatusDoPedido status) {
         this.cliente_id = cliente_id;

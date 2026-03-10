@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -32,6 +35,22 @@ public class Pedido {
     @JsonManagedReference
     private Pagamento pagamento;
 
+    @OneToMany(mappedBy = "id.pedido", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Set<ItemDoPedido> items = new HashSet<>();
+
+    public List<Produto> getProduto() {
+        return items.stream().map(ItemDoPedido::getProduto).toList();
+    }
+
+
+    public Pedido(Usuario cliente, LocalDate momento, StatusDoPedido status, Pagamento pagamento, Set<ItemDoPedido> items) {
+        this.cliente = cliente;
+        this.momento = momento;
+        this.status = status;
+        this.pagamento = pagamento;
+        this.items = items;
+    }
 
     public Pedido(Usuario cliente, LocalDate momento, StatusDoPedido status) {
         this.cliente = cliente;
