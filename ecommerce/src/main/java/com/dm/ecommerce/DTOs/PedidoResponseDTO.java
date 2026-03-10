@@ -6,22 +6,30 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
 
 public class PedidoResponseDTO {
-    private UUID cliente_id;
+
     private UUID id;
+    private UUID cliente_id;
     private LocalDate momento;
     private StatusDoPedido status;
+    private List<ItemDoPedidoResponseDTO> items;
 
     public PedidoResponseDTO(Pedido pedido) {
         this.id = pedido.getId();
         this.cliente_id = pedido.getCliente().getId();
         this.status = pedido.getStatus();
         this.momento = pedido.getMomento();
+
+        this.items = pedido.getItems()
+                .stream()
+                .map(ItemDoPedidoResponseDTO::new)
+                .toList();
     }
 
     @Override
@@ -30,7 +38,7 @@ public class PedidoResponseDTO {
                 "cliente_id=" + cliente_id +
                 ", id=" + id +
                 ", momento=" + momento +
-                ", status=" + status + ".";
+                ", status=" + status +
+                ", items=" + items + ".";
     }
 }
-
