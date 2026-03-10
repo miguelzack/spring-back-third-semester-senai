@@ -43,4 +43,7 @@ public class PagamentoService {
         List<PagamentoResponseDTO> listaDePagamentos = pagamentos.stream().map(PagamentoResponseDTO::new).toList();
         return  listaDePagamentos;
     }
+
+
+
 }

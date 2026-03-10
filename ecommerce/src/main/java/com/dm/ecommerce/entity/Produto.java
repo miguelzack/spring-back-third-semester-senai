@@ -1,6 +1,7 @@
 package com.dm.ecommerce.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,15 +27,22 @@ public class Produto {
     private Double preco;
     private String imgUrl;
 
-
     @ManyToMany
     @JoinTable(name = "tb_produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private Set<Categoria> categorias = new HashSet<>();
 
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemDoPedido> items = new HashSet<>();
+
     public List<Pedido> getPedido() {
         return items.stream().map(ItemDoPedido::getPedido).toList();
+    }
+
+    public Produto(@NotBlank(message = "Esse campo não pode ser vazio.") String nome, @NotBlank(message = "Esse campo não pode ser vazio.") String descricao, Double preco, @NotBlank(message = "Esse campo não pode ser vazio.") String imgUrl) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.imgUrl = imgUrl;
     }
 
 }
