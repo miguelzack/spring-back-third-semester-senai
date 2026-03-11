@@ -37,10 +37,17 @@ public class Pedido {
 
     @OneToMany(mappedBy = "id.pedido", cascade = CascadeType.ALL,
             orphanRemoval = true)
+    @JsonManagedReference
     private Set<ItemDoPedido> items = new HashSet<>();
 
     public List<Produto> getProduto() {
         return items.stream().map(ItemDoPedido::getProduto).toList();
+    }
+
+    public double getSubtotal() {
+        return items.stream()
+                .mapToDouble(item -> item.getPreco() * item.getQuantidade())
+                .sum();
     }
 
 

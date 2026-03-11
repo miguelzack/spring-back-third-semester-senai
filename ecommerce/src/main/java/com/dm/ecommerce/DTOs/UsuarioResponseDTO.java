@@ -1,6 +1,5 @@
 package com.dm.ecommerce.DTOs;
 
-import com.dm.ecommerce.entity.Pedido;
 import com.dm.ecommerce.entity.Usuario;
 import com.dm.ecommerce.enums.Role;
 import lombok.Getter;
@@ -12,15 +11,15 @@ import java.util.UUID;
 
 @Getter
 @Setter
-
 public class UsuarioResponseDTO {
+
     private UUID id;
     private String nome;
     private String email;
     private String telefone;
     private String senha;
     private Role roles;
-    private List<Pedido> pedidos = new ArrayList<>();
+    private List<PedidoResumoDTO> pedidos = new ArrayList<>();
 
     public UsuarioResponseDTO(Usuario usuario) {
         this.id = usuario.getId();
@@ -29,9 +28,12 @@ public class UsuarioResponseDTO {
         this.telefone = usuario.getTelefone();
         this.senha = usuario.getSenha();
         this.roles = usuario.getRoles();
-        this.pedidos = usuario.getPedidos();
-    }
 
+        this.pedidos = usuario.getPedidos()
+                .stream()
+                .map(PedidoResumoDTO::new)
+                .toList();
+    }
 
     @Override
     public String toString() {

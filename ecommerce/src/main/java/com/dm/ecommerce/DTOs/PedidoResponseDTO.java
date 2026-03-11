@@ -11,13 +11,13 @@ import java.util.UUID;
 
 @Getter
 @Setter
-
 public class PedidoResponseDTO {
 
     private UUID id;
     private UUID cliente_id;
     private LocalDate momento;
     private StatusDoPedido status;
+    private double subtotal;
     private List<ItemDoPedidoResponseDTO> items;
 
     public PedidoResponseDTO(Pedido pedido) {
@@ -25,6 +25,7 @@ public class PedidoResponseDTO {
         this.cliente_id = pedido.getCliente().getId();
         this.status = pedido.getStatus();
         this.momento = pedido.getMomento();
+        this.subtotal = pedido.getSubtotal();
 
         this.items = pedido.getItems()
                 .stream()
@@ -39,6 +40,7 @@ public class PedidoResponseDTO {
                 ", id=" + id +
                 ", momento=" + momento +
                 ", status=" + status +
+                ", subtotal=" + subtotal +
                 ", items=" + items + ".";
     }
 }
