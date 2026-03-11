@@ -1,5 +1,6 @@
 package com.dm.biblioteca.services;
 
+import com.dm.biblioteca.DTOs.LoanResponseDTO;
 import com.dm.biblioteca.DTOs.UserRequestDTO;
 import com.dm.biblioteca.DTOs.UserResponseDTO;
 import com.dm.biblioteca.entity.User;
@@ -56,6 +57,22 @@ public class UserService {
         } else {
             return "This ID is not valid.";
         }
+    }
+
+    public List<LoanResponseDTO> showUserLoans(long id) {
+        Optional<User> user = userRepository.findById(id);
+
+        if (user.isEmpty()) {
+            throw new RuntimeException("This ID is not valid.");
+        }
+
+        List<LoanResponseDTO> loans = user.get()
+                .getLoans()
+                .stream()
+                .map(LoanResponseDTO::new)
+                .toList();
+
+        return loans;
     }
 
     public String deleteUser(long id) {

@@ -54,16 +54,5 @@ public class LoanService {
             return "This ID is not valid. Please try again.";
         }
     }
-
-
-    public String deleteLoan(long id) {
-        Optional<Loan> loan = loanRepository.findById(id);
-
-        if (loan.isPresent()) {
-            loanRepository.deleteById(id);
-            return "Loan successfully deleted!";
-        } else {
-            return "This ID is not valid. Please try again.";
-        }
-    }
+    
 }

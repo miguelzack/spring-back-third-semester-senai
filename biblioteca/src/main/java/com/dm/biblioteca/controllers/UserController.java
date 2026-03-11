@@ -45,4 +45,10 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.deleteUser(id));
     }
+
+    @GetMapping(value = "view/{id}/loans")
+    public ResponseEntity<?> viewUserLoans(@PathVariable long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.showUserLoans(id));
+    }
 }

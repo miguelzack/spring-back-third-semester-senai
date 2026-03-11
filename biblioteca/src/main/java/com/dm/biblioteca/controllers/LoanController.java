@@ -19,6 +19,7 @@ import java.util.List;
 @RequestMapping(value = "emprestimo")
 public class LoanController {
     private final LoanService loanService;
+
     public LoanController(LoanService loanService) {
         this.loanService = loanService;
     }
@@ -38,8 +39,4 @@ public class LoanController {
         return ResponseEntity.status(HttpStatus.OK).body(loanService.searchById(id));
     }
 
-    @DeleteMapping(value = "delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(loanService.deleteLoan(id));
-    }
 }
