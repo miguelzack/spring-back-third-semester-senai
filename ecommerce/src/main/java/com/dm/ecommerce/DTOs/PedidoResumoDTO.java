@@ -1,7 +1,7 @@
 package com.dm.ecommerce.DTOs;
 
 import com.dm.ecommerce.entity.Pedido;
-import com.dm.ecommerce.enums.StatusDoPedido;
+import com.dm.ecommerce.entity.enums.StatusDoPedido;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,7 +1,7 @@
 package com.dm.ecommerce.DTOs;
 
 import com.dm.ecommerce.entity.Pedido;
-import com.dm.ecommerce.enums.Role;
+import com.dm.ecommerce.entity.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

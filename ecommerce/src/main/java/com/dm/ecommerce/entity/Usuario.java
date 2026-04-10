@@ -1,6 +1,6 @@
 package com.dm.ecommerce.entity;
 
-import com.dm.ecommerce.enums.Role;
+import com.dm.ecommerce.entity.enums.Role;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

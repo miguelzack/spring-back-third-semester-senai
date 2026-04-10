@@ -7,6 +7,7 @@ import com.dm.ecommerce.DTOs.UsuarioResponseDTO;
 import com.dm.ecommerce.entity.Usuario;
 import com.dm.ecommerce.repositories.PedidoRepository;
 import com.dm.ecommerce.repositories.UsuarioRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,16 +18,21 @@ import java.util.UUID;
 @Service
 @Transactional
 public class UsuarioService {
+
+    private final PasswordEncoder passwordEncoder;
     private final UsuarioRepository usuarioRepository;
     private final PedidoRepository pedidoRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, PedidoRepository pedidoRepository) {
+    public UsuarioService(PasswordEncoder passwordEncoder, UsuarioRepository usuarioRepository, PedidoRepository pedidoRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.usuarioRepository = usuarioRepository;
         this.pedidoRepository = pedidoRepository;
     }
 
     public String saveUsuario(UsuarioRequestDTO usuarioRequestDTO) {
-        Usuario usuario = new Usuario(usuarioRequestDTO.getNome(), usuarioRequestDTO.getEmail(), usuarioRequestDTO.getTelefone(), usuarioRequestDTO.getSenha(), usuarioRequestDTO.getRoles());
+        String senhaCriptografada = passwordEncoder.encode(usuarioRequestDTO.getSenha());
+
+        Usuario usuario = new Usuario(usuarioRequestDTO.getNome(), usuarioRequestDTO.getEmail(), usuarioRequestDTO.getTelefone(), senhaCriptografada, usuarioRequestDTO.getRoles());
         usuarioRepository.save(usuario);
         return "Usuário criado com sucesso.";
     }

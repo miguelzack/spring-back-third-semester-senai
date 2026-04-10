@@ -1,7 +1,7 @@
 package com.dm.ecommerce.DTOs;
 
 import com.dm.ecommerce.entity.Usuario;
-import com.dm.ecommerce.enums.Role;
+import com.dm.ecommerce.entity.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,6 +1,6 @@
 package com.dm.ecommerce.entity;
 
-import com.dm.ecommerce.enums.StatusDoPedido;
+import com.dm.ecommerce.entity.enums.StatusDoPedido;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;

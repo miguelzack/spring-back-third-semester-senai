@@ -4,7 +4,7 @@ import com.dm.ecommerce.DTOs.PagamentoRequestDTO;
 import com.dm.ecommerce.DTOs.PagamentoResponseDTO;
 import com.dm.ecommerce.entity.Pagamento;
 import com.dm.ecommerce.entity.Pedido;
-import com.dm.ecommerce.enums.StatusDoPedido;
+import com.dm.ecommerce.entity.enums.StatusDoPedido;
 import com.dm.ecommerce.repositories.PagamentoRepository;
 import com.dm.ecommerce.repositories.PedidoRepository;
 import org.springframework.stereotype.Service;
