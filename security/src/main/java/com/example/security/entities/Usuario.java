@@ -17,3 +17,4 @@ public class Usuario {
     private String senha;
     private Role role;
 }
+    
