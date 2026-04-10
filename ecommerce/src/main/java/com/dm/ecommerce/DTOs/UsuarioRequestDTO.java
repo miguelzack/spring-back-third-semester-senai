@@ -36,7 +36,7 @@ public class UsuarioRequestDTO {
         this.email = email;
         this.telefone = telefone;
         this.senha = senha;
-        this.roles = roles;
+        this.roles = Role.USER;
         this.pedidos = pedidos;
     }
 }

@@ -21,8 +21,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 public class Usuario {
-    // Fazer um seachbuserbyid
-    //Fazer um put no usuario
     //fazer o map que a manu explicou
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
