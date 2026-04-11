@@ -23,8 +23,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
-                .requestMatchers("/usuario/cadastro", "/usuario/login").permitAll()
-                .requestMatchers("/usuario/view", "/usuario/delete").hasRole("ADMIN").anyRequest().authenticated()).httpBasic(withDefaults()
+                .requestMatchers("/usuario/cadastro", "/usuario/login", "/pedido/view/{id}", "/pedido/cadastro").permitAll()
+                .requestMatchers("/usuario/view", "/usuario/delete", "/pedido/view/", "/pedido/delete").hasRole("ADMIN").anyRequest().authenticated()).httpBasic(withDefaults()
 
 
         );

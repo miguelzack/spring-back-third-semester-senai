@@ -19,6 +19,8 @@ import java.util.UUID;
 @RequestMapping(value = "pedido")
 public class PedidoController {
 
+    //ta faltando um search pedido by user
+
     private final PedidoService pedidoService;
 
     public PedidoController(PedidoService pedidoService) {
