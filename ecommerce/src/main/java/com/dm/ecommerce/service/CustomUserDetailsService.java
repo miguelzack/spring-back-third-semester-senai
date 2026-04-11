@@ -1,7 +1,7 @@
-package com.example.security.services;
+package com.dm.ecommerce.service;
 
-import com.example.security.entities.Usuario;
-import com.example.security.repositories.UsuarioRepository;
+import com.dm.ecommerce.entity.Usuario;
+import com.dm.ecommerce.repositories.UsuarioRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +21,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByEmail(email);
-        return User.builder().username(usuario.getEmail()).password(usuario.getSenha()).roles(usuario.getRole().name().replace("ROLE_", "")).build();
+        return User.builder().username(usuario.getEmail()).password(usuario.getSenha()).roles(usuario.getRoles().name().replace("ROLE_", "")).build();
     }
 }
