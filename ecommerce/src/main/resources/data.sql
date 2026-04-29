@@ -1,0 +1,10 @@
+    insert into usuario (id, nome, email, telefone, senha) values (1, 'Sile', 'stutchell0@go.com', '472-244-0407', '$2a$10$IQxH33puMtq/by8.P9bHeOe0JkiQxeBYUVQhvVH2C5REerTscP4GW');
+insert into usuario (id, nome, email, telefone, senha) values (2, 'Adey', 'adraxford1@exblog.jp', '570-742-2893', '$2a$04$9ht4iDKIyFCFTCzePVSrAOl6GA6KCeUiPeOvH5ed5PU83hvWYEY.q');
+insert into usuario (id, nome, email, telefone, senha) values (3, 'Leoine', 'ldanhel2@yolasite.com', '269-222-5656', '$2a$04$Yu7hF3osCNi8nGH7Etk74e1FznupBNkI5wMy50f4V1.UB..xzmiZ.');
+insert into usuario (id, nome, email, telefone, senha) values (4, 'Laurent', 'lluquet3@ftc.gov', '795-729-7529', '$2a$04$DkH/Rx9U3hQ/CBM2yqHineFZPdLwnn4DlpRmhS0qj79asqJ7v1XTO');
+insert into usuario (id, nome, email, telefone, senha) values (5, 'Bride', 'bbase4@blog.com', '775-688-1767', '$2a$04$IADA5YiCXNIifkPfRkWXzuf.kNRv1n3bmHARaS7MQNmAmbJ2vCXNm');
+insert into usuario (id, nome, email, telefone, senha) values (6, 'Valeria', 'vjoinson5@paginegialle.it', '129-960-2096', '$2a$04$qGkG1lWV5HoQU8oy8KwnzeUyF2xmKGduVxbwfBKA5TxbaoJf5SlMm');
+insert into usuario (id, nome, email, telefone, senha) values (7, 'Jasmine', 'jskillett6@pen.io', '501-402-0722', '$2a$04$DAFy06oRPMIdz1.8PMz8TeDGm3RdQ3dppdjnNLav/Kak1Jv7yLnfC');
+insert into usuario (id, nome, email, telefone, senha) values (8, 'Eldin', 'ehumes7@sitemeter.com', '124-472-2428', '$2a$04$XWE3HtKAt/AQEWyhRqKpTefcYkrhqDcpoms4vqIaWhjbBIace3oTm');
+insert into usuario (id, nome, email, telefone, senha) values (9, 'Ailyn', 'adonahue8@live.com', '295-300-2315', '$2a$04$WHJ0kG0JpQH6j7FF3UoxReLic.ips2w4aULKzpV.Feb0vuOoASw6O');
+insert into usuario (id, nome, email, telefone, senha) values (10, 'Ewell', 'emcanulty9@geocities.com', '437-877-5336', '$2a$04$C8tFsASo4rogA2v08O8kaOmeiCdRrpOdlAfgTcfypSd2TTUYBpHPi');
