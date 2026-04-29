@@ -28,10 +28,10 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.saveUsuario(usuarioRequestDTO));
     }
 
-    @PostMapping(value = "login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioService.login(loginRequestDTO));
-    }
+//    @PostMapping(value = "login")
+//    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioService.login(loginRequestDTO));
+//    }
 
     @GetMapping(value = "view")
     public List<UsuarioResponseDTO> mostrar() {
