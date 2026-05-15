@@ -22,8 +22,8 @@ public class ProdutoService {
         this.produtoRepository = produtoRepository;
     }
 
-    public String saveProduto(@Valid ProdutoRequestDTO produtoRequestDTO) {
-        Produto produto = new Produto(produtoRequestDTO.getNome(), produtoRequestDTO.getDescricao(), produtoRequestDTO.getPreco(), produtoRequestDTO.getImgUrl());
+    public String saveProduto(@Valid ProdutoRequestDTO produtoRequestDTO, String pathPhoto) {
+        Produto produto = new Produto(produtoRequestDTO.getNome(), produtoRequestDTO.getDescricao(), produtoRequestDTO.getPreco(), pathPhoto    );
         produtoRepository.save(produto);
         return "Produto criado com sucesso.";
     }

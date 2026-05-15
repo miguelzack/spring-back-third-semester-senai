@@ -3,12 +3,15 @@ package com.dm.ecommerce.controllers;
 import com.dm.ecommerce.DTOs.ProdutoRequestDTO;
 import com.dm.ecommerce.DTOs.ProdutoResponseDTO;
 import com.dm.ecommerce.entity.Produto;
+import com.dm.ecommerce.service.PhotoService;
 import com.dm.ecommerce.service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,14 +20,19 @@ import java.util.UUID;
 @RequestMapping(value = "produto")
 public class ProdutoController {
     private final ProdutoService produtoService;
+    private final PhotoService photoService;
 
-    public ProdutoController(ProdutoService produtoService) {
+    public ProdutoController(ProdutoService produtoService, PhotoService photoService) {
         this.produtoService = produtoService;
+        this.photoService = photoService;
     }
 
-    @PostMapping(value = "cadastro")
-    public ResponseEntity<?> saveProduto(@Valid @RequestBody ProdutoRequestDTO produto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.saveProduto(produto));
+    @PostMapping(value = "cadastro", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> saveProduto(@Valid @ModelAttribute ProdutoRequestDTO produto) throws IOException {
+        String pathPhoto = photoService.savePhoto(produto.getImgUrl());
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(produtoService.saveProduto(produto, pathPhoto));
     }
 
     @GetMapping(value = "view")

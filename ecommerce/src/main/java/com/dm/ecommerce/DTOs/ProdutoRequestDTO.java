@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -15,10 +16,9 @@ public class ProdutoRequestDTO {
     @NotBlank(message = "Esse campo não pode ser vazio.")
     private String descricao;
     private Double preco;
-    @NotBlank(message = "Esse campo não pode ser vazio.")
-    private String imgUrl;
+    private MultipartFile imgUrl;
 
-    public ProdutoRequestDTO(String nome, String descricao, Double preco, String imgUrl) {
+    public ProdutoRequestDTO(String nome, String descricao, Double preco, MultipartFile imgUrl) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
