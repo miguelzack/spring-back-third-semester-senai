@@ -1,5 +1,6 @@
 package com.dm.ecommerce.DTOs;
 
+import com.dm.ecommerce.entity.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,7 +20,7 @@ public class LoginRequestDTO {
     @NotBlank(message = "O campo não pode estar vazio.")
     private String senha;
 
-    public LoginRequestDTO(String email, String senha) {
+    public LoginRequestDTO(String email, String senha, Role roles) {
         this.email = email;
         this.senha = senha;
     }

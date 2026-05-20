@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +30,16 @@ public class UsuarioRequestDTO {
     @Size(min = 6, max = 20, message = "A senha deve ter entre 6 a 20 caracteres.")
     private String senha;
     private Role roles;
+    private MultipartFile imgUrl;
     private List<Pedido> pedidos = new ArrayList<>();
 
-    public UsuarioRequestDTO(String nome, String email, String telefone, String senha, Role roles, List<Pedido> pedidos) {
+    public UsuarioRequestDTO(String nome, String email, String telefone, String senha, Role roles, MultipartFile imgUrl, List<Pedido> pedidos) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.senha = senha;
-        this.roles = Role.USER;
+        this.roles = roles;
+        this.imgUrl = imgUrl;
         this.pedidos = pedidos;
     }
 }
