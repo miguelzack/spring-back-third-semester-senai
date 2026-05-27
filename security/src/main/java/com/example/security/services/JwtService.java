@@ -20,16 +20,14 @@ public class JwtService {
 
 
     public String gerarToken(String email) {
+        Date expiracao = Date.from(Instant.now().plusSeconds(120));
 
-        if (tokenAtual != null && expiracaoAtual.after(new Date())) {
-            return tokenAtual;
-        }
-        expiracaoAtual = Date.from(Instant.now().plusSeconds(120));
-
-        tokenAtual = Jwts.builder().setSubject(email).setExpiration(expiracaoAtual).signWith(SignatureAlgorithm.HS256, SECRET).compact();
-        return tokenAtual;
+        return Jwts.builder()
+                .setSubject(email)
+                .setExpiration(expiracao)
+                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .compact();
     }
-
 
     public String pegarEmail(String token) {
         return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().getSubject();
