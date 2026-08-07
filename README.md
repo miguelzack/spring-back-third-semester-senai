@@ -4,11 +4,11 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.x-brightgreen?style=for-the-badge&logo=springboot)
 ![Maven](https://img.shields.io/badge/Maven-Wrapper-blue?style=for-the-badge&logo=apachemaven)
 ![MySQL](https://img.shields.io/badge/MySQL-Database-orange?style=for-the-badge&logo=mysql)
-![Status](https://img.shields.io/badge/Status-Em%20desenvolvimento-yellow?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Conclu%C3%ADdo-brightgreen?style=for-the-badge)
 
 Repositório com projetos back-end desenvolvidos durante o **3º semestre do curso técnico de Desenvolvimento de Sistemas do SENAI**.
 
-O objetivo deste repositório é reunir atividades práticas usando **Java**, **Spring Boot**, **Spring Web**, **Spring Data JPA**, **MySQL**, **Validation**, **Lombok**, upload de arquivos e conceitos de autenticação/autorização com **Spring Security** e **JWT**.
+O objetivo deste repositório é reunir atividades práticas concluídas usando **Java**, **Spring Boot**, **Spring Web**, **Spring Data JPA**, **MySQL**, **Validation**, **Lombok**, upload de arquivos e conceitos de autenticação/autorização com **Spring Security** e **JWT**.
 
 ---
 
@@ -32,6 +32,19 @@ Cada pasta representa um projeto Spring Boot separado, com seu próprio `pom.xml
 | `foto` | Projeto focado em cadastro de usuário com upload de foto | Multipart file, upload local e persistência no banco |
 | `security` | Projeto de estudo sobre autenticação e autorização | Spring Security, JWT, roles e endpoint admin |
 | `toDoComplete` | API de lista de tarefas com usuários e tarefas | CRUD, relacionamento 1:N, status de tarefa e MySQL |
+
+### Versões e configuração por projeto
+
+| Projeto | Spring Boot | Banco | Perfil principal |
+|---|---:|---|---|
+| `biblioteca` | 4.0.3 | `library` | padrão |
+| `ecommerce` | 4.0.2 | `ecommerce_dev` | `dev` |
+| `find-pet-backend` | 4.0.2 | `HELPPET` | padrão |
+| `foto` | 4.0.6 | `photo` | padrão |
+| `security` | 4.0.5 | `seguranca` (`dev`) | `dev` |
+| `toDoComplete` | 4.0.0 | `todolist` | padrão |
+
+Todos os projetos definem Java 25 no `pom.xml`. As versões acima foram conferidas diretamente nos arquivos de build de cada aplicação.
 
 ---
 
@@ -139,7 +152,7 @@ Os arquivos de configuração ficam em:
 src/main/resources/application.properties
 ```
 
-ou, em alguns projetos:
+ou, nos projetos que possuem perfis:
 
 ```bash
 src/main/resources/application-dev.properties
@@ -156,6 +169,8 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 ```
+
+`ecommerce` e `security` iniciam com o perfil `dev` por padrão. O `ecommerce` usa `ecommerce_dev` no desenvolvimento e `ecommerceprod` em produção; `security` usa `seguranca` no desenvolvimento e `prod` em produção. Confirme usuário, senha e banco antes de iniciar cada API.
 
 > Em ambiente real, senhas e dados sensíveis não devem ficar diretamente no repositório.  
 > O ideal é usar variáveis de ambiente ou arquivos locais ignorados pelo Git.
@@ -671,8 +686,8 @@ Este repositório reúne práticas importantes de desenvolvimento back-end:
 
 ## Observações importantes
 
-- Os projetos são acadêmicos e estão em desenvolvimento.
-- Alguns endpoints podem ser expandidos futuramente.
+- Os projetos deste repositório foram concluídos como atividades acadêmicas do 3º semestre.
+- Os endpoints documentados refletem a implementação atual; novas evoluções podem ser feitas em versões futuras.
 - As configurações de banco estão voltadas para ambiente local.
 - Para produção, recomenda-se:
   - Remover senhas fixas dos arquivos `.properties`
