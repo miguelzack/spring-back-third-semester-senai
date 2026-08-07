@@ -44,7 +44,13 @@ public class ProdutoService {
     }
 
     public List<ProdutoResponseDTO> mostrar() {
-        List<Produto> produtos = produtoRepository.findAll();
+        return mostrar(null);
+    }
+
+    public List<ProdutoResponseDTO> mostrar(UUID categoriaId) {
+        List<Produto> produtos = categoriaId == null
+                ? produtoRepository.findAll()
+                : produtoRepository.findDistinctByCategorias_Id(categoriaId);
         List<ProdutoResponseDTO> listaDeProdutos = produtos.stream().map(ProdutoResponseDTO::new).toList();
         return listaDeProdutos;
     }

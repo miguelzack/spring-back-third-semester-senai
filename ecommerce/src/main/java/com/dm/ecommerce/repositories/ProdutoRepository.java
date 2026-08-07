@@ -4,10 +4,13 @@ import com.dm.ecommerce.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 public interface ProdutoRepository extends JpaRepository<Produto, UUID> {
     Optional<Produto> findById(UUID id);
 
     void deleteById(UUID id);
+
+    List<Produto> findDistinctByCategorias_Id(UUID categoriaId);
 }

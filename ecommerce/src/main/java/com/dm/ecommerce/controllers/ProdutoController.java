@@ -36,8 +36,8 @@ public class ProdutoController {
     }
 
     @GetMapping(value = "view")
-    public List<ProdutoResponseDTO> mostrar() {
-        return produtoService.mostrar();
+    public List<ProdutoResponseDTO> mostrar(@RequestParam(required = false) UUID categoriaId) {
+        return produtoService.mostrar(categoriaId);
     }
 
     @GetMapping(value = "view/{id}")
