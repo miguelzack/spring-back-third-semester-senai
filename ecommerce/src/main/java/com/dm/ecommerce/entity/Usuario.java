@@ -30,7 +30,7 @@ public class Usuario {
     private String email;
     private String telefone;
     private String senha;
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Role roles;
 //    private String imgUrl;
 

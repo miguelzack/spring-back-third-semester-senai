@@ -29,7 +29,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth.requestMatchers("/usuario/cadastro", "/usuario/login", "/pedido/view/{id}", "/pedido/cadastro", "/produto/view", "/produto/view/{id}", "/pagamento/cadastro").permitAll().requestMatchers("/usuario/view", "/usuario/delete", "/pedido/view/", "/pedido/delete", "/produto/cadastro", "/produto/{id}", "/produto/delete", "/pagamento/view").hasRole("ADMIN").anyRequest().authenticated()).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+        return httpSecurity.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth.requestMatchers("/usuario/cadastro", "/usuario/view/{id}", "/usuario/login", "/pedido/view/{id}", "/pedido/cadastro", "/produto/view", "/produto/view/{id}", "/pagamento/cadastro").permitAll().requestMatchers("/usuario/view", "/usuario/delete", "/pedido/view/", "/pedido/delete", "/produto/cadastro", "/produto/{id}", "/produto/delete", "/pagamento/view").hasRole("ADMIN").anyRequest().authenticated()).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .build();
     }
