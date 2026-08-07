@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -15,6 +17,7 @@ public class ProdutoResponseDTO {
     private String descricao;
     private Double preco;
     private String imgUrl;
+    private Set<UUID> categoriaIds;
 
     public ProdutoResponseDTO(Produto produto) {
         this.id = produto.getId();
@@ -22,6 +25,7 @@ public class ProdutoResponseDTO {
         this.descricao = produto.getDescricao();
         this.preco = produto.getPreco();
         this.imgUrl = produto.getImgUrl();
+        this.categoriaIds = produto.getCategorias().stream().map(categoria -> categoria.getId()).collect(Collectors.toSet());
     }
 
     @Override

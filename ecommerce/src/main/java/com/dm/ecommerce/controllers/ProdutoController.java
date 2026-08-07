@@ -42,7 +42,10 @@ public class ProdutoController {
 
     @GetMapping(value = "view/{id}")
     public ResponseEntity<?> searchById(@PathVariable UUID id) {
-        return ResponseEntity.status(HttpStatus.OK).body(produtoService.buscaPorId(id));
+        ProdutoResponseDTO produto = produtoService.buscaPorId(id);
+        return produto == null
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(produto);
     }
 
     @PutMapping("{id}")
@@ -52,6 +55,9 @@ public class ProdutoController {
 
     @DeleteMapping(value = "delete/{id}")
     public ResponseEntity<?> deleteUsuario(@PathVariable UUID id) {
-        return ResponseEntity.status(HttpStatus.OK).body(produtoService.deleteProduto(id));
+        boolean deleted = produtoService.deleteProduto(id);
+        return deleted
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.notFound().build();
     }
 }

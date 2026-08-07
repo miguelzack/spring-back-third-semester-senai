@@ -5,6 +5,7 @@ import com.dm.ecommerce.DTOs.ProdutoRequestDTO;
 import com.dm.ecommerce.DTOs.ProdutoResponseDTO;
 import com.dm.ecommerce.entity.Produto;
 import com.dm.ecommerce.repositories.ProdutoRepository;
+import com.dm.ecommerce.repositories.CategoriaRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,26 +18,29 @@ import java.util.UUID;
 @Transactional
 public class ProdutoService {
     private final ProdutoRepository produtoRepository;
+    private final CategoriaRepository categoriaRepository;
 
-    public ProdutoService(ProdutoRepository produtoRepository) {
+    public ProdutoService(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository) {
         this.produtoRepository = produtoRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     public String saveProduto(@Valid ProdutoRequestDTO produtoRequestDTO, String pathPhoto) {
         Produto produto = new Produto(produtoRequestDTO.getNome(), produtoRequestDTO.getDescricao(), produtoRequestDTO.getPreco(), pathPhoto    );
+        if (produtoRequestDTO.getCategoriaIds() != null && !produtoRequestDTO.getCategoriaIds().isEmpty()) {
+            produto.setCategorias(new java.util.HashSet<>(categoriaRepository.findAllById(produtoRequestDTO.getCategoriaIds())));
+        }
         produtoRepository.save(produto);
         return "Produto criado com sucesso.";
     }
 
-    public String buscaPorId(UUID id) {
+    public ProdutoResponseDTO buscaPorId(UUID id) {
         Optional<Produto> produto = produtoRepository.findById(id);
 
         if (produto.isPresent()) {
-            ProdutoResponseDTO dto = new ProdutoResponseDTO(produto.get());
-            return dto.toString();
-        } else {
-            return "Esse ID não é válido.";
+            return new ProdutoResponseDTO(produto.get());
         }
+        return null;
     }
 
     public List<ProdutoResponseDTO> mostrar() {
@@ -59,13 +63,12 @@ public class ProdutoService {
         }
     }
 
-    public String deleteProduto(UUID id) {
+    public boolean deleteProduto(UUID id) {
         Optional<Produto> produto = produtoRepository.findById(id);
         if (produto.isPresent()) {
             produtoRepository.deleteById(id);
-            return "Produto deletado com sucesso.";
-        } else {
-            return "ID inválido.";
+            return true;
         }
+        return false;
     }
 }

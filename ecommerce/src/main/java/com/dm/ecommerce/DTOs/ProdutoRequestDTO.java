@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Set;
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,6 +20,7 @@ public class ProdutoRequestDTO {
     private String descricao;
     private Double preco;
     private MultipartFile imgUrl;
+    private Set<UUID> categoriaIds;
 
     public ProdutoRequestDTO(String nome, String descricao, Double preco, MultipartFile imgUrl) {
         this.nome = nome;

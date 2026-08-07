@@ -24,8 +24,9 @@ public class PagamentoController {
     }
 
     @PostMapping(value = "cadastro")
-    public ResponseEntity<?> savePagamento(@Valid @RequestBody PagamentoRequestDTO pagamento) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoService.savePagamento(pagamento));
+    public ResponseEntity<?> savePagamento(@Valid @RequestBody PagamentoRequestDTO pagamento, org.springframework.security.core.Authentication authentication) {
+        boolean admin = authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoService.savePagamento(pagamento, authentication.getName(), admin));
     }
 
     @GetMapping(value = "view")

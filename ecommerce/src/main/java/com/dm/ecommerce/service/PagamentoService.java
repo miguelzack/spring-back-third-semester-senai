@@ -22,9 +22,9 @@ public class PagamentoService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public String savePagamento(PagamentoRequestDTO pagamentoRequestDTO) {
+    public String savePagamento(PagamentoRequestDTO pagamentoRequestDTO, String authenticatedEmail, boolean admin) {
         Optional<Pedido> pedidoPagamento = pedidoRepository.findById(pagamentoRequestDTO.getPedido_id());
-        if (pedidoPagamento.isEmpty()) {
+        if (pedidoPagamento.isEmpty() || (!admin && !pedidoPagamento.get().getCliente().getEmail().equals(authenticatedEmail))) {
             return "Pedido não encontrado. Digite ID de um pedido válido.";
         }
 

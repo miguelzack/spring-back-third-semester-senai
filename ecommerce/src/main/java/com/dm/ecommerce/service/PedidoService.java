@@ -33,9 +33,11 @@ public class PedidoService {
 
 
     //criar pedido
-    public String savePedido(@Valid PedidoRequestDTO pedidoRequestDTO) {
+    public String savePedido(@Valid PedidoRequestDTO pedidoRequestDTO, String authenticatedEmail, boolean admin) {
 
-        Optional<Usuario> usuarioPedido = usuarioRepository.findById(pedidoRequestDTO.getCliente_id());
+        Optional<Usuario> usuarioPedido = admin
+                ? usuarioRepository.findById(pedidoRequestDTO.getCliente_id())
+                : Optional.ofNullable(usuarioRepository.findByEmail(authenticatedEmail));
 
         if (usuarioPedido.isEmpty()) {
             return "Usuário não encontrado. Digite ID de um usuário válido.";
@@ -67,35 +69,32 @@ public class PedidoService {
     }
 
     //mostrar todas as tarefas
-    public List<PedidoResponseDTO> mostrar() {
-        List<Pedido> pedidos = pedidoRepository.findAll();
+    public List<PedidoResponseDTO> mostrar(String authenticatedEmail, boolean admin) {
+        List<Pedido> pedidos = admin ? pedidoRepository.findAll() : pedidoRepository.findByClienteEmail(authenticatedEmail);
         List<PedidoResponseDTO> listaDePedidos = pedidos.stream().map(PedidoResponseDTO::new).toList();
         return listaDePedidos;
     }
 
 
     //procurar pedido por id
-    public String searchPedido(UUID id) {
+    public PedidoResponseDTO searchPedido(UUID id, String authenticatedEmail, boolean admin) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
 
-        if (pedido.isPresent()) {
-            PedidoResponseDTO dto = new PedidoResponseDTO(pedido.get());
-            return dto.toString();
-        } else {
-            return "Esse ID não é válido.";
+        if (pedido.isPresent() && (admin || pedido.get().getCliente().getEmail().equals(authenticatedEmail))) {
+            return new PedidoResponseDTO(pedido.get());
         }
+        return null;
     }
 
 
     //deletar pedido
-    public String deletePedido(UUID id) {
+    public boolean deletePedido(UUID id, String authenticatedEmail, boolean admin) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
 
-        if (pedido.isPresent()) {
+        if (pedido.isPresent() && (admin || pedido.get().getCliente().getEmail().equals(authenticatedEmail))) {
             pedidoRepository.deleteById(id);
-            return "Pedido deletado com sucesso.";
-        } else {
-            return "Esse ID não existe.";
+            return true;
         }
+        return false;
     }
 }

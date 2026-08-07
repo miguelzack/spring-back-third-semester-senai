@@ -47,7 +47,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
 
             } catch (Exception e) {
-                System.out.println("Token inválido: " + e.getMessage());
+                SecurityContextHolder.clearContext();
             }
         }
 

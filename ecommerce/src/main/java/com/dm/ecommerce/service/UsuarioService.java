@@ -54,16 +54,18 @@ public class UsuarioService {
 //        }
 //    }
 
-    public String searchUserById(UUID id) {
+    public UsuarioResponseDTO searchUserById(UUID id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
 
         if (usuario.isPresent()) {
-            UsuarioResponseDTO dto = new UsuarioResponseDTO(usuario.get());
-            return dto.toString();
+            return new UsuarioResponseDTO(usuario.get());
         }
-        else {
-            return "Esse ID não é válido.";
-        }
+        return null;
+    }
+
+    public UsuarioResponseDTO searchUserByEmail(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        return usuario == null ? null : new UsuarioResponseDTO(usuario);
     }
 
     public List<UsuarioResponseDTO> mostrar() {
@@ -73,13 +75,12 @@ public class UsuarioService {
         return listaDeUsuarios;
     }
 
-    public String deleteUsuario(UUID id) {
+    public boolean deleteUsuario(UUID id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
             usuarioRepository.deleteById(id);
-            return "Usuário deletado com sucesso.";
-        } else {
-            return "ID inválido.";
+            return true;
         }
+        return false;
     }
 }
