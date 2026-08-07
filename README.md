@@ -27,7 +27,7 @@ Cada pasta representa um projeto Spring Boot separado, com seu próprio `pom.xml
 | Projeto | Descrição | Principais recursos |
 |---|---|---|
 | `biblioteca` | API para gerenciamento de usuários, empréstimos e carteira de biblioteca | CRUD, relacionamento entre entidades, DTOs e MySQL |
-| `ecommerce` | API de e-commerce com usuários, produtos, pedidos, pagamentos, upload de imagens e autenticação | JWT, Spring Security, upload de fotos, roles, pedidos e produtos |
+| `ecommerce` | API de e-commerce publicada no Render com banco PostgreSQL/Supabase | JWT, Spring Security, categorias, filtro de produtos, pedidos, pagamentos e imagens no Supabase Storage |
 | `find-pet-backend` | API simples para cadastro de pets disponíveis para adoção | Cadastro de pet, enums de tipo e porte |
 | `foto` | Projeto focado em cadastro de usuário com upload de foto | Multipart file, upload local e persistência no banco |
 | `security` | Projeto de estudo sobre autenticação e autorização | Spring Security, JWT, roles e endpoint admin |
@@ -38,7 +38,7 @@ Cada pasta representa um projeto Spring Boot separado, com seu próprio `pom.xml
 | Projeto | Spring Boot | Banco | Perfil principal |
 |---|---:|---|---|
 | `biblioteca` | 4.0.3 | `library` | padrão |
-| `ecommerce` | 4.0.2 | `ecommerce_dev` | `dev` |
+| `ecommerce` | 4.0.2 | PostgreSQL/Supabase | `dev`/produção |
 | `find-pet-backend` | 4.0.2 | `HELPPET` | padrão |
 | `foto` | 4.0.6 | `photo` | padrão |
 | `security` | 4.0.5 | `seguranca` (`dev`) | `dev` |
@@ -278,11 +278,13 @@ API de e-commerce com gerenciamento de usuários, produtos, pedidos, pagamentos,
 
 ## Funcionalidades
 
-- Cadastro de usuários com foto
+- Cadastro de usuários
 - Login com JWT
 - Controle de acesso por roles
-- Cadastro de produtos com imagem
-- Listagem de produtos
+- Cadastro de produtos com imagem via `multipart/form-data`
+- Armazenamento público das imagens no Supabase Storage
+- Listagem pública de categorias cadastradas diretamente no banco
+- Listagem de produtos e filtro por categoria
 - Busca de produto por ID
 - Atualização de produto
 - Exclusão de produto
@@ -321,13 +323,31 @@ ENTREGUE,
 CANCELADO
 ```
 
-## Upload de arquivos
+## Categorias e filtro
 
-O projeto possui upload de fotos para usuários e produtos.  
-No perfil de desenvolvimento, o diretório configurado é:
+As categorias são mantidas diretamente no banco e não possuem endpoints de criação, alteração ou exclusão. Elas podem ser consultadas pelo painel administrativo e pelos usuários:
+
+```http
+GET /categoria/view
+GET /categoria/view/{id}
+```
+
+Para filtrar produtos por categoria, use o UUID da categoria:
+
+```http
+GET /produto/view?categoriaId=UUID_DA_CATEGORIA
+```
+
+Sem o parâmetro `categoriaId`, o endpoint retorna todos os produtos.
+
+## Upload de imagens
+
+O cadastro de produtos utiliza `multipart/form-data`. O arquivo é enviado para o Supabase Storage e a API salva a URL pública no produto.
 
 ```properties
-upload.dir=uploads/photos
+SUPABASE_URL=https://seu-projeto.supabase.co
+SUPABASE_SERVICE_KEY=sua-chave-secreta
+SUPABASE_STORAGE_BUCKET=products
 ```
 
 ## Autenticação
@@ -359,21 +379,49 @@ Authorization: Bearer SEU_TOKEN_AQUI
 
 | Método | Rota | Descrição | Acesso |
 |---|---|---|---|
-| `POST` | `/usuario/cadastro` | Cadastra usuário com foto | Público |
+| `POST` | `/usuario/cadastro` | Cadastra usuário | Público |
 | `POST` | `/usuario/login` | Realiza login | Público |
-| `GET` | `/usuario/view` | Lista usuários | Admin |
+| `GET` | `/usuario/me` | Retorna os dados do usuário autenticado | Usuário/Admin |
+| `GET` | `/usuario/view/{id}` | Busca usuário por ID | Usuário/Admin |
+| `GET` | `/usuario/view` | Lista usuários | Usuário/Admin |
 | `DELETE` | `/usuario/delete/{id}` | Remove usuário | Admin |
-| `POST` | `/produto/cadastro` | Cadastra produto com imagem | Admin |
+| `POST` | `/produto/cadastro` | Cadastra produto com imagem e categorias | Admin |
 | `GET` | `/produto/view` | Lista produtos | Público |
+| `GET` | `/produto/view?categoriaId={id}` | Filtra produtos por categoria | Público |
 | `GET` | `/produto/view/{id}` | Busca produto por ID | Público |
 | `PUT` | `/produto/{id}` | Atualiza produto | Admin |
 | `DELETE` | `/produto/delete/{id}` | Remove produto | Admin |
-| `POST` | `/pedido/cadastro` | Cadastra pedido | Público |
-| `GET` | `/pedido/view` | Lista pedidos | Admin |
-| `GET` | `/pedido/view/{id}` | Busca pedido por ID | Público |
+| `POST` | `/pedido/cadastro` | Cadastra pedido | Usuário/Admin |
+| `GET` | `/pedido/view` | Lista pedidos do usuário ou todos para Admin | Usuário/Admin |
+| `GET` | `/pedido/view/{id}` | Busca pedido por ID | Usuário/Admin |
 | `DELETE` | `/pedido/delete/{id}` | Remove pedido | Admin |
-| `POST` | `/pagamento/cadastro` | Cadastra pagamento | Público |
+| `POST` | `/pagamento/cadastro` | Cadastra pagamento | Usuário/Admin |
 | `GET` | `/pagamento/view` | Lista pagamentos | Admin |
+
+## Cadastro de produto
+
+Envie como `multipart/form-data`, usando um campo de categoria para cada UUID:
+
+| Campo | Tipo | Obrigatório | Descrição |
+|---|---|---:|---|
+| `nome` | Texto | Sim | Nome do produto |
+| `descricao` | Texto | Sim | Descrição |
+| `preco` | Número | Sim | Preço |
+| `categoriaIds` | UUID | Não | ID de categoria existente; pode ser repetido |
+| `imgUrl` | Arquivo | Sim | Imagem do produto |
+
+Exemplo no Postman:
+
+```text
+POST /produto/cadastro
+Authorization: Bearer SEU_TOKEN_ADMIN
+Body: form-data
+nome: Produto demonstrativo
+descricao: Produto para teste
+preco: 99.90
+categoriaIds: UUID_DA_CATEGORIA
+imgUrl: imagem.png (File)
+```
 
 ## Exemplo de cadastro de pedido
 
