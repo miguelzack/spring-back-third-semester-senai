@@ -40,17 +40,29 @@ public class UsuarioService {
         return "Usuário criado com sucesso.";
     }
 
-    public String login(LoginRequestDTO loginRequestDTO) {
-        Usuario findUsuario = usuarioRepository.findByEmail(loginRequestDTO.getEmail());
+//    public String login(LoginRequestDTO loginRequestDTO) {
+//        Usuario findUsuario = usuarioRepository.findByEmail(loginRequestDTO.getEmail());
+//
+//        if (findUsuario == null) {
+//            return "Usuário não encontrado.";
+//        } else {
+//            if (findUsuario.getSenha().equals(loginRequestDTO.getSenha())) {
+//                return "Logado com sucesso.";
+//            } else {
+//                return "Senha incorreta.";
+//            }
+//        }
+//    }
 
-        if (findUsuario == null) {
-            return "Usuário não encontrado.";
-        } else {
-            if (findUsuario.getSenha().equals(loginRequestDTO.getSenha())) {
-                return "Logado com sucesso.";
-            } else {
-                return "Senha incorreta.";
-            }
+    public String searchUserById(UUID id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+
+        if (usuario.isPresent()) {
+            UsuarioResponseDTO dto = new UsuarioResponseDTO(usuario.get());
+            return dto.toString();
+        }
+        else {
+            return "Esse ID não é válido.";
         }
     }
 

@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
+public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
     Optional<Pedido> findById(@NotBlank(message = "O ID do pedido não pode ser vazio.") UUID pedidoId);
 
     void deleteById(UUID id);

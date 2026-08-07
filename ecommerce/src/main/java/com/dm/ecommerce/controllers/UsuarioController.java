@@ -5,6 +5,7 @@ import com.dm.ecommerce.DTOs.LoginRequestDTO;
 import com.dm.ecommerce.DTOs.UsuarioRequestDTO;
 import com.dm.ecommerce.DTOs.UsuarioResponseDTO;
 import com.dm.ecommerce.service.PhotoService;
+import com.dm.ecommerce.service.ProdutoService;
 import com.dm.ecommerce.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,9 @@ import java.util.UUID;
 @RequestMapping(value = "usuario")
 public class UsuarioController {
     private final UsuarioService usuarioService;
-    private final PhotoService photoService;
-    
-    public UsuarioController(UsuarioService usuarioService, PhotoService photoService) {
+
+    public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
-        this.photoService = photoService;
     }
 
     @PostMapping(value = "cadastro")
@@ -38,6 +37,11 @@ public class UsuarioController {
 //    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
 //        return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioService.login(loginRequestDTO));
 //    }
+
+    @GetMapping(value = "view/{id}")
+    public ResponseEntity<?> searchById(@PathVariable UUID id) {
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.searchUserById(id));
+    }
 
     @GetMapping(value = "view")
     public List<UsuarioResponseDTO> mostrar() {
