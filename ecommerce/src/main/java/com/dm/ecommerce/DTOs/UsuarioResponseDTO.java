@@ -19,7 +19,7 @@ public class UsuarioResponseDTO {
     private String telefone;
     private String senha;
     private Role roles;
-    private String imgUrl;
+//    private String imgUrl;
 
     private List<PedidoResumoDTO> pedidos = new ArrayList<>();
 
@@ -30,13 +30,13 @@ public class UsuarioResponseDTO {
         this.telefone = usuario.getTelefone();
         this.senha = usuario.getSenha();
         this.roles = usuario.getRoles();
-        this.imgUrl = usuario.getImgUrl();
+//        this.imgUrl = usuario.getImgUrl();
 
         this.pedidos = usuario.getPedidos().stream().map(PedidoResumoDTO::new).toList();
     }
 
     @Override
     public String toString() {
-        return "UsuarioResponseDTO{" + "id=" + id + ", nome='" + nome + '\'' + ", email='" + email + '\'' + ", telefone='" + telefone + '\'' + ", senha='" + senha + '\'' + ", roles=" + roles + ", imgUrl='" + imgUrl + '\'' + ", pedidos=" + pedidos + '}';
+        return "UsuarioResponseDTO{" + "id=" + id + ", nome='" + nome + '\'' + ", email='" + email + '\'' + ", telefone='" + telefone + '\'' + ", senha='" + senha + '\'' + ", roles=" + roles + '\'' + ", pedidos=" + pedidos + '}';
     }
 }

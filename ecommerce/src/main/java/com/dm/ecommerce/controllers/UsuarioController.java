@@ -27,11 +27,11 @@ public class UsuarioController {
         this.photoService = photoService;
     }
 
-    @PostMapping(value = "cadastro", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> saveUser(@Valid @ModelAttribute UsuarioRequestDTO usuarioRequestDTO) throws Exception {
-        String pathPhoto = photoService.savePhoto(usuarioRequestDTO.getImgUrl());
+    @PostMapping(value = "cadastro")
+    public ResponseEntity<?> saveUser(@Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO) throws Exception {
+//        String pathPhoto = photoService.savePhoto(usuarioRequestDTO.getImgUrl());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.saveUsuario(usuarioRequestDTO, pathPhoto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.saveUsuario(usuarioRequestDTO));
     }
 
 //    @PostMapping(value = "login")

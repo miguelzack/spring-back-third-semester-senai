@@ -19,7 +19,7 @@ public class JwtService {
         if (tokenAtual != null && expiracaoAtual.after(new Date())) {
             return tokenAtual;
         }
-        expiracaoAtual = Date.from(Instant.now().plusSeconds(120));
+        expiracaoAtual = Date.from(Instant.now().plusSeconds(5000));
 
         tokenAtual = Jwts.builder()
                 .setSubject(email)

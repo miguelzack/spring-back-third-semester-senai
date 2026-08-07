@@ -1,7 +1,6 @@
 package com.dm.ecommerce.service;
 
 import com.dm.ecommerce.DTOs.LoginRequestDTO;
-import com.dm.ecommerce.DTOs.PedidoResponseDTO;
 import com.dm.ecommerce.DTOs.UsuarioRequestDTO;
 import com.dm.ecommerce.DTOs.UsuarioResponseDTO;
 import com.dm.ecommerce.entity.Usuario;
@@ -31,12 +30,12 @@ public class UsuarioService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public String saveUsuario(@Valid UsuarioRequestDTO usuarioRequestDTO, String pathPhoto) {
+    public String saveUsuario(@Valid UsuarioRequestDTO usuarioRequestDTO) {
         String senhaCriptografada = passwordEncoder.encode(usuarioRequestDTO.getSenha());
 
 
 
-        Usuario usuario = new Usuario(usuarioRequestDTO.getNome(), usuarioRequestDTO.getEmail(), usuarioRequestDTO.getTelefone(), senhaCriptografada, Role.USER, pathPhoto);
+        Usuario usuario = new Usuario(usuarioRequestDTO.getNome(), usuarioRequestDTO.getEmail(), usuarioRequestDTO.getTelefone(), senhaCriptografada, Role.USER);
         usuarioRepository.save(usuario);
         return "Usuário criado com sucesso.";
     }
