@@ -72,7 +72,12 @@ public class ProdutoService {
     public boolean deleteProduto(UUID id) {
         Optional<Produto> produto = produtoRepository.findById(id);
         if (produto.isPresent()) {
-            produtoRepository.deleteById(id);
+            Produto produtoExistente = produto.get();
+            if (!produtoExistente.getItems().isEmpty()) {
+                throw new IllegalStateException("O produto não pode ser excluído porque faz parte do histórico de pedidos.");
+            }
+            produtoExistente.getCategorias().clear();
+            produtoRepository.delete(produtoExistente);
             return true;
         }
         return false;

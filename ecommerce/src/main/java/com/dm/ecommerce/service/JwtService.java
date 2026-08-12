@@ -7,7 +7,6 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import javax.crypto.SecretKey;
@@ -15,8 +14,6 @@ import javax.crypto.SecretKey;
 @Service
 public class JwtService {
 
-    private String tokenAtual;
-    private Date expiracaoAtual;
     @Value("${security.jwt.secret}")
     private String secret;
 
@@ -28,17 +25,12 @@ public class JwtService {
     }
 
     public String gerarToken(String email) {
-        if (tokenAtual != null && expiracaoAtual.after(new Date())) {
-            return tokenAtual;
-        }
-        expiracaoAtual = Date.from(Instant.now().plusSeconds(expirationSeconds));
-
-        tokenAtual = Jwts.builder()
+        Date expiration = new Date(System.currentTimeMillis() + expirationSeconds * 1000);
+        return Jwts.builder()
                 .setSubject(email)
-                .setExpiration(expiracaoAtual)
+                .setExpiration(expiration)
                 .signWith(signingKey(), SignatureAlgorithm.HS256)
                 .compact();
-        return tokenAtual;
     }
 
     public String pegarEmail(String token) {

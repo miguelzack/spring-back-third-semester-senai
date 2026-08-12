@@ -37,6 +37,11 @@ public class ApiExceptionHandler {
         return error(HttpStatus.INTERNAL_SERVER_ERROR, "Erro interno do servidor.", request);
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<?> conflict(IllegalStateException exception, HttpServletRequest request) {
+        return error(HttpStatus.CONFLICT, exception.getMessage(), request);
+    }
+
     private ResponseEntity<?> error(HttpStatus status, String message, HttpServletRequest request) {
         return ResponseEntity.status(status).body(Map.of(
                 "timestamp", Instant.now(),
